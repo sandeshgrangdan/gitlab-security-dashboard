@@ -8,7 +8,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "w-css": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./public/output.css --watch"
+    "w-css": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./public/output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./public/output.css"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0",

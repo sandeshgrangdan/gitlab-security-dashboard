@@ -1,9 +1,15 @@
 name: 'publish'
 
+# on:
+#   push:
+#     tags:
+#       - 'app-v*'
+
 on:
+  workflow_dispatch:
   push:
-    tags:
-      - 'app-v*'
+    branches:
+      - release
 
 jobs:
   publish-tauri:
@@ -51,7 +57,10 @@ jobs:
 
       - name: install frontend dependencies
         # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
-        run: yarn install # change this to npm or pnpm depending on which one you use.
+        run: yarn install && yarn build # change this to npm or pnpm depending on which one you use.
+
+      - name: Install Yew dependencies
+        run: cargo install --locked trunk
 
       - uses: tauri-apps/tauri-action@v0
         env:
