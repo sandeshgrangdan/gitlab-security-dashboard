@@ -1,15 +1,15 @@
 name: 'publish'
 
-# on:
-#   push:
-#     tags:
-#       - 'app-v*'
-
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    tags:
+      - 'app-v*'
+
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
 
 jobs:
   publish-tauri:

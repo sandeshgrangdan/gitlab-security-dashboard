@@ -66,7 +66,7 @@ pub struct GetVulnerabilityBlobInfo;
 #[derive(GraphQLQuery, Clone)]
 #[graphql(
     schema_path = "src/api/gitlab/graphql/schema.json",
-    query_path = "src/api/gitlab/graphql/blob_Info.graphql",
+    query_path = "src/api/gitlab/graphql/blob_info.graphql",
     response_derives = "Debug"
 )]
 pub struct GetBlobInfo;
