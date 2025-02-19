@@ -1,0 +1,83 @@
+query PathLastCommit($projectPath: ID!, $path: String, $ref: String!, $refType: RefType) {
+  project(fullPath: $projectPath) {
+    __typename
+    id
+    repository {
+      __typename
+      paginatedTree(path: $path, ref: $ref, refType: $refType) {
+        __typename
+        nodes {
+          __typename
+          lastCommit {
+            __typename
+            id
+            sha
+            title
+            titleHtml
+            descriptionHtml
+            message
+            webPath
+            authoredDate
+            authorName
+            authorGravatar
+            author {
+              __typename
+              id
+              name
+              avatarUrl
+              webPath
+            }
+            signature {
+              __typename
+              ... on GpgSignature {
+                gpgKeyPrimaryKeyid
+                verificationStatus
+                __typename
+              }
+              ... on X509Signature {
+                verificationStatus
+                x509Certificate {
+                  id
+                  subject
+                  subjectKeyIdentifier
+                  x509Issuer {
+                    id
+                    subject
+                    subjectKeyIdentifier
+                    __typename
+                  }
+                  __typename
+                }
+                __typename
+              }
+              ... on SshSignature {
+                verificationStatus
+                keyFingerprintSha256
+                __typename
+              }
+            }
+            pipelines(ref: $ref, first: 1) {
+              __typename
+              edges {
+                __typename
+                node {
+                  __typename
+                  id
+                  detailedStatus {
+                    __typename
+                    id
+                    detailsPath
+                    icon
+                    tooltip
+                    text
+                    group
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

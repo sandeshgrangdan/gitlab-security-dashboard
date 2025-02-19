@@ -1,0 +1,161 @@
+
+
+query GroupVulnerabilities($fullPath: ID!, $before: String, $after: String, $first: Int = 20, $last: Int, $projectId: [ID!], $severity: [VulnerabilitySeverity!], $reportType: [VulnerabilityReportType!], $scanner: [String!], $scannerId: [VulnerabilitiesScannerID!], $state: [VulnerabilityState!], $dismissalReason: [VulnerabilityDismissalReason!], $sort: VulnerabilitySort, $hasIssues: Boolean, $hasResolution: Boolean, $hasMergeRequest: Boolean, $hasRemediations: Boolean, $vetEnabled: Boolean = false, $clusterAgentId: [ClustersAgentID!], $owaspTopTen: [VulnerabilityOwaspTop10!]) {
+  group(fullPath: $fullPath) {
+    id
+    vulnerabilities(
+      before: $before
+      after: $after
+      first: $first
+      last: $last
+      severity: $severity
+      reportType: $reportType
+      scanner: $scanner
+      scannerId: $scannerId
+      state: $state
+      dismissalReason: $dismissalReason
+      projectId: $projectId
+      sort: $sort
+      hasIssues: $hasIssues
+      hasResolution: $hasResolution
+      hasMergeRequest: $hasMergeRequest
+      hasRemediations: $hasRemediations
+      clusterAgentId: $clusterAgentId
+      owaspTopTen: $owaspTopTen
+    ) {
+      nodes {
+        ...VulnerabilityFragment
+        __typename
+      }
+      pageInfo {
+        ...PageInfo
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment VulnerabilityFragment on Vulnerability {
+  id
+  title
+  description
+  state
+  severity
+  detectedAt
+  dismissalReason
+  vulnerabilityPath
+  resolvedOnDefaultBranch
+  userNotesCount
+  aiResolutionAvailable
+  aiResolutionEnabled
+  falsePositive @include(if: $vetEnabled)
+  hasRemediations
+  issueLinks {
+    nodes {
+      id
+      issue {
+        id
+        iid
+        webUrl
+        webPath
+        title
+        state
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  mergeRequest {
+    id
+    webUrl
+    state
+    iid
+    __typename
+  }
+  identifiers {
+    externalType
+    name
+    __typename
+  }
+  location {
+    ...VulnerabilityLocation
+    __typename
+  }
+  project {
+    id
+    nameWithNamespace
+    __typename
+  }
+  cvss {
+    overallScore
+    version
+    __typename
+  }
+  cveEnrichment {
+    epssScore
+    isKnownExploit
+    __typename
+  }
+  reportType
+  scanner {
+    id
+    vendor
+    __typename
+  }
+  __typename
+}
+
+fragment VulnerabilityLocation on VulnerabilityLocation {
+  ... on VulnerabilityLocationClusterImageScanning {
+    image
+    kubernetesResource {
+      agent {
+        id
+        name
+        webPath
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  ... on VulnerabilityLocationContainerScanning {
+    image
+    containerRepositoryUrl
+    __typename
+  }
+  ... on VulnerabilityLocationDependencyScanning {
+    blobPath
+    file
+    __typename
+  }
+  ... on VulnerabilityLocationSast {
+    blobPath
+    file
+    startLine
+    __typename
+  }
+  ... on VulnerabilityLocationSecretDetection {
+    blobPath
+    file
+    startLine
+    __typename
+  }
+  ... on VulnerabilityLocationDast {
+    path
+    __typename
+  }
+  __typename
+}
+
+fragment PageInfo on PageInfo {
+  hasNextPage
+  hasPreviousPage
+  startCursor
+  endCursor
+  __typename
+}
+

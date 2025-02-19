@@ -1,0 +1,20 @@
+{
+  "name": "gitlab-security",
+  "version": "1.0.0",
+  "description": "Security Dashboard",
+  "main": "index.js",
+  "repository": "github.com/sandeshgrangdan/gitlab-security",
+  "author": "sandeshgrangdan",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "w-css": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./public/output.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "dependencies": {
+    "@tauri-apps/plugin-sql": "~2"
+  }
+}

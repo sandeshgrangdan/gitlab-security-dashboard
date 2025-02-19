@@ -1,0 +1,104 @@
+query VulnerabilitySeveritiesCount(
+  $fullPath: ID = "", 
+  $projectId: [ID!], 
+  $severity: [VulnerabilitySeverity!], 
+  $reportType: [VulnerabilityReportType!], 
+  $scanner: [String!], 
+  $state: [VulnerabilityState!], 
+  $scannerId: [VulnerabilitiesScannerID!], 
+  $hasIssues: Boolean, 
+  $hasResolution: Boolean, 
+  $hasMergeRequest: Boolean, 
+  $hasRemediations: Boolean, 
+  $clusterAgentId: [ClustersAgentID!], 
+  $image: [String!], 
+  $isGroup: Boolean = false, 
+  $isProject: Boolean = false, 
+  $isInstance: Boolean = false, 
+  $capped: Boolean = false, 
+  $dismissalReason: [VulnerabilityDismissalReason!], 
+  $owaspTopTen: [VulnerabilityOwaspTop10!], 
+  $identifierName: String) {
+  instance: instanceSecurityDashboard @include(if: $isInstance) {
+    vulnerabilitySeveritiesCount(
+      projectId: $projectId
+      severity: $severity
+      reportType: $reportType
+      scanner: $scanner
+      state: $state
+      scannerId: $scannerId
+      hasIssues: $hasIssues
+      hasResolution: $hasResolution
+      hasMergeRequest: $hasMergeRequest
+      hasRemediations: $hasRemediations
+      dismissalReason: $dismissalReason
+      owaspTopTen: $owaspTopTen
+      capped: $capped
+    ) {
+      critical
+      high
+      info
+      low
+      medium
+      unknown
+      __typename
+    }
+    __typename
+  }
+  group(fullPath: $fullPath) @include(if: $isGroup) {
+    id
+    vulnerabilitySeveritiesCount(
+      projectId: $projectId
+      severity: $severity
+      reportType: $reportType
+      scanner: $scanner
+      state: $state
+      scannerId: $scannerId
+      hasIssues: $hasIssues
+      hasResolution: $hasResolution
+      hasMergeRequest: $hasMergeRequest
+      hasRemediations: $hasRemediations
+      dismissalReason: $dismissalReason
+      owaspTopTen: $owaspTopTen
+      capped: $capped
+    ) {
+      critical
+      high
+      info
+      low
+      medium
+      unknown
+      __typename
+    }
+    __typename
+  }
+  project(fullPath: $fullPath) @include(if: $isProject) {
+    id
+    vulnerabilitySeveritiesCount(
+      severity: $severity
+      reportType: $reportType
+      scanner: $scanner
+      state: $state
+      scannerId: $scannerId
+      hasIssues: $hasIssues
+      hasResolution: $hasResolution
+      hasMergeRequest: $hasMergeRequest
+      hasRemediations: $hasRemediations
+      clusterAgentId: $clusterAgentId
+      image: $image
+      dismissalReason: $dismissalReason
+      owaspTopTen: $owaspTopTen
+      capped: $capped
+      identifierName: $identifierName
+    ) {
+      critical
+      high
+      info
+      low
+      medium
+      unknown
+      __typename
+    }
+    __typename
+  }
+}

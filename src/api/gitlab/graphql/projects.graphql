@@ -1,0 +1,14 @@
+query GetProjects($after : String) {
+  projects(membership: true, search: "", first: 100, after: $after) {
+    nodes {
+      id
+      name
+      fullPath
+      avatarUrl
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}

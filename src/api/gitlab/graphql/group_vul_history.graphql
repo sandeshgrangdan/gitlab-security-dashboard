@@ -1,0 +1,19 @@
+query GroupVulnerabilityHistory($fullPath: ID!, $startDate: ISO8601Date!, $endDate: ISO8601Date!) {
+  group(fullPath: $fullPath) {
+    id
+    vulnerabilitiesCountByDay(startDate: $startDate, endDate: $endDate) {
+      nodes {
+        date
+        critical
+        high
+        medium
+        low
+        info
+        unknown
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

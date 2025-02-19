@@ -1,0 +1,76 @@
+query GetVuls($fullPath: ID!, $after : String, $before : String, $first: Int) {
+  project(fullPath: $fullPath) {
+    nameWithNamespace
+    vulnerabilities ( after: $after, before: $before, first: $first  ) {
+      nodes {
+        id
+        title
+        description
+        severity
+        state
+        detectedAt
+        reportType
+        scanner {
+          name
+        }
+        identifiers {
+          externalType
+          name
+          __typename
+        }
+        location {
+          ... on VulnerabilityLocationClusterImageScanning {
+            image
+            kubernetesResource {
+              agent {
+                id
+                name
+                webPath
+                __typename
+              }
+              __typename
+            }
+            __typename
+          }
+          ... on VulnerabilityLocationContainerScanning {
+            image
+            containerRepositoryUrl
+            __typename
+          }
+          ... on VulnerabilityLocationDependencyScanning {
+            blobPath
+            file
+            __typename
+          }
+          ... on VulnerabilityLocationSast {
+            blobPath
+            file
+            startLine
+            endLine
+            __typename
+          }
+          ... on VulnerabilityLocationSecretDetection {
+            blobPath
+            file
+            startLine
+            endLine
+            __typename
+          }
+          ... on VulnerabilityLocationDast {
+            path
+            __typename
+          }
+          __typename
+        }
+      }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+        __typename
+      }
+    }
+  }
+}
+

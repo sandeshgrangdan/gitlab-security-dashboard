@@ -1,0 +1,63 @@
+query VulnerabilitySeveritiesCount(
+  $fullPath: ID!, 
+  $reportType: [VulnerabilityReportType!], 
+  $state: [VulnerabilityState!], 
+  $hasResolution: Boolean, 
+  $isGroup: Boolean!, 
+  $isProject: Boolean!, 
+  $isInstance: Boolean!, 
+  $capped: Boolean!, 
+  $dismissalReason: [VulnerabilityDismissalReason!], 
+  ) {
+  instance: instanceSecurityDashboard @include(if: $isInstance) {
+    vulnerabilitySeveritiesCount(
+      reportType: $reportType
+      state: $state
+      hasResolution: $hasResolution
+      dismissalReason: $dismissalReason
+      capped: $capped
+    ) {
+      ...VulnerabilitySeveritiesCount
+      __typename
+    }
+    __typename
+  }
+  group(fullPath: $fullPath) @include(if: $isGroup) {
+    id
+    vulnerabilitySeveritiesCount(
+      reportType: $reportType
+      state: $state
+      hasResolution: $hasResolution
+      dismissalReason: $dismissalReason
+      capped: $capped
+    ) {
+      ...VulnerabilitySeveritiesCount
+      __typename
+    }
+    __typename
+  }
+  project(fullPath: $fullPath) @include(if: $isProject) {
+    id
+    vulnerabilitySeveritiesCount(
+      reportType: $reportType
+      state: $state
+      hasResolution: $hasResolution
+      dismissalReason: $dismissalReason
+      capped: $capped
+    ) {
+      ...VulnerabilitySeveritiesCount
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment VulnerabilitySeveritiesCount on VulnerabilitySeveritiesCount {
+  critical
+  high
+  info
+  low
+  medium
+  unknown
+  __typename
+}

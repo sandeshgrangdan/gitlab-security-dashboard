@@ -1,0 +1,51 @@
+[package]
+name = "gitlab-security-ui"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+gloo-net = "0.6.0"
+yew = { version = "0.21", features = ["csr"] }
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = ["Window","History", "Document", "HtmlCanvasElement", "CanvasRenderingContext2d"] }
+js-sys = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde-wasm-bindgen = "0.6"
+console_error_panic_hook = "0.1.7"
+wasm-logger = "0.2.0"
+gloo-console = "0.3.0"
+graphql_client = "0.14.0"
+yew_icons = { version = "0.8", features = [
+  "LucideSearch",
+  "HeroiconsOutlineChevronLeft",
+  "HeroiconsOutlineChevronRight",
+  "OcticonsHomeFill24",
+  "BootstrapOctagonFill",
+  "BootstrapHexagonFill",
+  "BootstrapDiamondFill",
+  "BootstrapCaretDownFill",
+  "FontAwesomeSolidCircle",
+  "BootstrapQuestionCircleFill",
+  "FontAwesomeSolidCircleExclamation",
+  "OcticonsHome24",
+  "LucideClipboardCopy",
+  "OcticonsGitBranch16",
+  "FontAwesomeSolidHeart",
+  "BootstrapPinAngleFill",
+  "LucideGitlab",
+  "BootstrapPlusCircleDotted",
+  "BootstrapDashCircleDotted",
+  "OcticonsBookmark24",
+  "HeroiconsOutlineQuestionMarkCircle",
+  "BootstrapArrowClockwise"
+] }
+yew-router = "0.18.0"
+gloo-timers = "0.3.0"
+yew-chart = "0.6.0"
+chrono = "0.4.39"
+regex = "1.11.1"
+
+[workspace]
+members = ["src-tauri"]

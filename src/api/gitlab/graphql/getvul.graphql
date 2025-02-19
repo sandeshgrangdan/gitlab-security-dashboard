@@ -1,0 +1,80 @@
+query GetVul($id: VulnerabilityID!) {
+  vulnerability(id: $id) {
+    id
+    title
+    description
+    severity
+    state
+    detectedAt
+    reportType
+    scanner {
+      name
+    }
+    links {
+      url,
+      name
+    }
+    solution
+    identifiers {
+      externalType
+      name
+      url
+      __typename
+    }
+    cvss {
+      overallScore
+      version
+      __typename
+    }
+    cveEnrichment {
+      epssScore
+      isKnownExploit
+      __typename
+    }
+    location {
+      ... on VulnerabilityLocationClusterImageScanning {
+        image
+        kubernetesResource {
+          agent {
+            id
+            name
+            webPath
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      ... on VulnerabilityLocationContainerScanning {
+        image
+        containerRepositoryUrl
+        __typename
+      }
+      ... on VulnerabilityLocationDependencyScanning {
+        blobPath
+        file
+        __typename
+      }
+      ... on VulnerabilityLocationSast {
+        blobPath
+        file
+        startLine
+        endLine
+        __typename
+      }
+      ... on VulnerabilityLocationSecretDetection {
+        blobPath
+        file
+        startLine
+        endLine
+        __typename
+      }
+      ... on VulnerabilityLocationDast {
+        path
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
