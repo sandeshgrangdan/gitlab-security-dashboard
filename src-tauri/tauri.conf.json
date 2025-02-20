@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "gitlab-security",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "identifier": "com.gitlab-security.app",
   "build": {
     "beforeDevCommand": "trunk serve",
