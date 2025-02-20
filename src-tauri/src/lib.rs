@@ -7,13 +7,11 @@ pub mod db;
 
 #[tauri::command]
 fn get_env() -> (String, String, String) {
-    let gitlab_base_url =
-        env::var("GITLAB_BASE_URL").unwrap_or_else(|_| String::from("https://gitlab.com"));
-    let gitlab_token = env::var("CI_JOB_TOKEN").expect("No CI_JOB_TOKEN found.");
-    let group = env::var("GL_GROUP").unwrap_or_else(|_| String::from("innovate-tech"));
+    let gitlab_base_url = env::var("GITLAB_BASE_URL").unwrap_or_else(|_| String::from("https://gitlab.com"));
+    let gitlab_token = env::var("GITLAB_TOKEN").unwrap_or_else(|_| env::var("CI_JOB_TOKEN").unwrap_or_else(|_| String::new()));
+    let group = env::var("GITLAB_GROUP").unwrap_or_else(|_| String::from("innovate-tech"));
 
     println!("From get_envdd: {}, {}", gitlab_base_url, gitlab_token);
-
     (gitlab_base_url, gitlab_token, group)
 }
 

@@ -189,7 +189,7 @@ pub fn Home(props: &HomeProps) -> Html {
                     if path == "Home" {
                         IconId::OcticonsHomeFill24
                     } else {
-                        IconId::BootstrapArrowClockwise
+                        IconId::OcticonsHome24
                     }
                 }
                 onclick={move |_| onclick.emit(())}

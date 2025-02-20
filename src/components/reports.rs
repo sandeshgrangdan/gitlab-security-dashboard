@@ -127,7 +127,7 @@ pub fn Reports() -> Html {
                 }
             }</h1>
             <span class="mt-1 mb-5">{"The Vulnerability Report shows results of successful scans on your project's default branch, manually added vulnerability records, and vulnerabilities found from scanning operational environments. Learn more."}</span>
-            <div class="flex gap-5 mb-4">
+            <div class="flex gap-5 mb-4 w-full justify-between">
                 <BugSeverityIndicator
                     level={"Critical".to_string()}
                     number={vul_count.critical.unwrap_or(0) as usize}
