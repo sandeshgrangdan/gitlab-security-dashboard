@@ -57,6 +57,18 @@ launchctl getenv CI_JOB_TOKEN
 ```
 
 ## For Ubuntu
+### Installation
 ```sh
 cd ~/Downloads && sudo dpkg -i gitlab-security.deb 
 ```
+### Verify `CI_JOB_TOKEN`
+```sh
+echo $CI_JOB_TOKEN
+```
+### Open Application
+```sh
+gitlab-security
+```
+
+## For Windows
+Add `CI_JOB_TOKEN` as `ENV` variables. 
